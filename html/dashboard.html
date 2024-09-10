@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Profesor</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Bienvenido, Profesor</h1>
+        <nav>
+            <!-- Links a las páginas correspondientes -->
+            <a href="/html/alumnos.html">Gestionar Alumnos</a>
+            <a href="/html/cursos.html">Gestionar Cursos</a>
+            <a href="/html/asignar-cursos.html">Asignar Cursos</a> <!-- Agregado este enlace -->
+            <a href="/html/consultas.html">Consultas</a>
+            <!-- Botón de Cerrar Sesión -->
+            <button id="logout">Cerrar Sesión</button>
+        </nav>
+    </header>
+
+    <!-- JavaScript para manejar el logout -->
+    <script>
+        document.getElementById('logout')?.addEventListener('click', function () {
+            // Aquí puedes añadir la funcionalidad para cerrar la sesión
+            window.location.href = '/index.html'; // Redirige al login
+        });
+    </script>
+</body>
+</html>

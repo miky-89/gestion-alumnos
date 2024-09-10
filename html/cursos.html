@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h2>Cursos</h2>
+    <form id="cursoForm">
+        <input type="text" id="nombreCurso" placeholder="Nombre del Curso" required>
+        <button type="submit" id="submitCursoButton">Agregar Curso</button>
+        <!-- Campo oculto para almacenar el índice del curso que se está editando -->
+        <input type="hidden" id="cursoIndex" value="">
+    </form>
+    <div id="cursosList"></div>
+
+    <!-- Botón para volver al dashboard -->
+    <br>
+    <button onclick="window.location.href='/html/dashboard.html'">Volver</button>
+
+    <script>
+        // Obtener cursos desde LocalStorage o inicializar si no existen
+        let cursos = JSON.parse(localStorage.getItem('cursos')) || [];
+
+        // Función para mostrar los cursos
+        function mostrarCursos() {
+            const cursosList = document.getElementById('cursosList');
+            if (cursosList) {
+                cursosList.innerHTML = ''; // Limpiar la lista antes de agregar los cursos
+                cursos.forEach((curso, index) => {
+                    cursosList.innerHTML += `
+                        <div class="item">
+                            <span>${curso.nombre}</span>
+                            <div class="button-container">
+                                <button onclick="editarCurso(${index})">Editar</button>
+                                <button onclick="eliminarCurso(${index})">Eliminar</button>
+                            </div>
+                        </div>`;
+                });
+            }
+        }
+
+        // Agregar o editar curso
+        document.getElementById('cursoForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const nombre = document.getElementById('nombreCurso').value;
+            const index = document.getElementById('cursoIndex').value;
+
+            if (index === "") {
+                // Agregar nuevo curso
+                cursos.push({ nombre });
+            } else {
+                // Editar curso existente
+                cursos[index] = { nombre };
+            }
+
+            // Guardar los cursos en localStorage
+            localStorage.setItem('cursos', JSON.stringify(cursos));
+
+            // Mostrar los cursos actualizados
+            mostrarCursos();
+
+            // Limpiar formulario y resetear el índice del curso
+            document.getElementById('nombreCurso').value = '';
+            document.getElementById('cursoIndex').value = '';
+            document.getElementById('submitCursoButton').innerText = 'Agregar Curso';
+        });
+
+        // Eliminar un curso
+        function eliminarCurso(index) {
+            cursos.splice(index, 1);
+            localStorage.setItem('cursos', JSON.stringify(cursos));
+            mostrarCursos();
+        }
+
+        // Editar un curso
+        function editarCurso(index) {
+            const curso = cursos[index];
+            document.getElementById('nombreCurso').value = curso.nombre;
+            document.getElementById('cursoIndex').value = index;
+            document.getElementById('submitCursoButton').innerText = 'Guardar';
+        }
+
+        // Mostrar los cursos cuando se carga la página
+        mostrarCursos();
+    </script>
+</body>
+</html>

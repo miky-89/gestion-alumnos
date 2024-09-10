@@ -1,0 +1,135 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    color: #fff;
+    text-align: center;
+    margin: 0;
+}
+
+header {
+    background-color: #004a99;
+    padding: 15px;
+}
+
+h1, h2 {
+    margin: 20px 0;
+}
+
+nav {
+    margin: 20px;
+}
+
+nav a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+button {
+    background-color: #0057b7;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #003b8e;
+}
+
+input, select {
+    margin: 10px 0;
+    padding: 10px;
+    width: 80%;
+    max-width: 300px;
+    border: none;
+    border-radius: 5px;
+    color: #333;
+}
+
+/* Flexbox para la estructura de los selects y botones */
+.consulta-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.form-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-row select, .form-row button {
+    width: auto;
+    max-width: none;
+}
+
+#resultadosConsulta {
+    background-color: #f1f1f1;
+    color: #333;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    text-align: left;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+button:disabled {
+    background-color: #bbb;
+    cursor: not-allowed;
+}
+
+/* Estilos para los items en la lista (alumnos y cursos) */
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px auto;
+    padding: 10px;
+    width: 80%;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.item span {
+    flex: 1;
+    text-align: left;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+}
+
+/* Estilo específico para la lista de alumnos y cursos */
+#alumnosList, #cursosList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+}
+
+#alumnosList .item, #cursosList .item {
+    width: 100%;
+}

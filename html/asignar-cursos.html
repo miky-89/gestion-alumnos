@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asignar Cursos</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h2>Asignar Cursos a Alumnos</h2>
+    <form id="asignarForm">
+        <!-- Seleccionar alumno -->
+        <label for="alumnoSelect">Seleccionar Alumno:</label>
+        <select id="alumnoSelect" required>
+            <option value="">-- Seleccione un alumno --</option>
+        </select>
+
+        <!-- Seleccionar curso -->
+        <label for="cursoSelect">Seleccionar Curso:</label>
+        <select id="cursoSelect" required>
+            <option value="">-- Seleccione un curso --</option>
+        </select>
+
+        <!-- Botón para asignar curso -->
+        <button type="submit">Asignar Curso</button>
+    </form>
+
+    <!-- Aquí aparecerá la lista de alumnos y cursos asignados -->
+    <div id="alumnosCursos"></div>
+
+    <!-- Botón para volver al dashboard -->
+    <br>
+    <button onclick="window.location.href='/html/dashboard.html'">Volver</button>
+
+    <script src="/js/asignarCursos.js"></script>
+</body>
+</html>

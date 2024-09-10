@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultas de Estudiantes y Cursos</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h2>Consultas de Estudiantes y Cursos</h2>
+    
+    <div class="consulta-form">
+        <div class="form-row">
+            <label for="cursoSelect">Seleccionar Curso:</label>
+            <select id="cursoSelect">
+                <option value="">-- Seleccione un curso --</option>
+            </select>
+            <button id="verEstudiantesCurso">Ver Estudiantes del Curso</button>
+        </div>
+
+        <div class="form-row">
+            <label for="estudianteSelect">Seleccionar Estudiante:</label>
+            <select id="estudianteSelect">
+                <option value="">-- Seleccione un estudiante --</option>
+            </select>
+            <button id="verCursosEstudiante">Ver Cursos del Estudiante</button>
+        </div>
+    </div>
+
+    <div id="resultadosConsulta"></div>
+
+    <!-- Botón para volver al dashboard -->
+    <button onclick="window.location.href='/html/dashboard.html'">Volver al Dashboard</button>
+
+    <script src="/js/consulta.js"></script>
+</body>
+</html>

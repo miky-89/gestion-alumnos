@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Alumnos</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h2>Alumnos</h2>
+    <form id="alumnoForm">
+        <input type="text" id="nombreAlumno" placeholder="Nombre del Alumno" required>
+        <input type="number" id="edadAlumno" placeholder="Edad" required>
+        <button type="submit" id="submitButton">Agregar Alumno</button>
+        <input type="hidden" id="alumnoIndex" value="">
+    </form>
+    
+    <div id="alumnosList"></div>
+
+    <!-- Botón para volver al dashboard -->
+    <br>
+    <button onclick="window.location.href='/html/dashboard.html'">Volver</button>
+
+    <script>
+        // Obtener alumnos desde LocalStorage o inicializar si no existen
+        let alumnos = JSON.parse(localStorage.getItem('alumnos')) || [];
+
+        // Función para mostrar los alumnos
+        function mostrarAlumnos() {
+            const alumnosList = document.getElementById('alumnosList');
+            if (alumnosList) {
+                alumnosList.innerHTML = ''; // Limpiar la lista antes de agregar los alumnos
+                alumnos.forEach((alumno, index) => {
+                    alumnosList.innerHTML += `
+                        <div class="item">
+                            <span>${alumno.nombre} (${alumno.edad} años)</span>
+                            <div class="button-container">
+                                <button onclick="editarAlumno(${index})">Editar</button>
+                                <button onclick="eliminarAlumno(${index})">Eliminar</button>
+                            </div>
+                        </div>`;
+                });
+            }
+        }
+
+        // Agregar o editar alumno con validación
+        document.getElementById('alumnoForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const nombre = document.getElementById('nombreAlumno').value.trim();
+            const edad = document.getElementById('edadAlumno').value.trim();
+            const index = document.getElementById('alumnoIndex').value;
+
+            // Validar que no estén vacíos
+            if (!nombre || !edad) {
+                alert('Por favor, complete ambos campos.');
+                return;
+            }
+
+            if (index === "") {
+                // Agregar nuevo alumno
+                alumnos.push({ nombre, edad });
+            } else {
+                // Editar alumno existente
+                alumnos[index] = { nombre, edad };
+            }
+
+            // Guardar los alumnos en localStorage
+            localStorage.setItem('alumnos', JSON.stringify(alumnos));
+
+            // Mostrar los alumnos actualizados
+            mostrarAlumnos();
+
+            // Limpiar formulario y resetear el índice del alumno
+            document.getElementById('nombreAlumno').value = '';
+            document.getElementById('edadAlumno').value = '';
+            document.getElementById('alumnoIndex').value = '';
+            document.getElementById('submitButton').innerText = 'Agregar Alumno';
+        });
+
+        // Eliminar un alumno
+        function eliminarAlumno(index) {
+            alumnos.splice(index, 1);
+            localStorage.setItem('alumnos', JSON.stringify(alumnos));
+            mostrarAlumnos();
+        }
+
+        // Editar un alumno
+        function editarAlumno(index) {
+            const alumno = alumnos[index];
+            document.getElementById('nombreAlumno').value = alumno.nombre;
+            document.getElementById('edadAlumno').value = alumno.edad;
+            document.getElementById('alumnoIndex').value = index;
+            document.getElementById('submitButton').innerText = 'Guardar';
+        }
+
+        // Mostrar los alumnos cuando se carga la página
+        mostrarAlumnos();
+    </script>
+</body>
+</html>
